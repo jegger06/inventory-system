@@ -1,0 +1,17 @@
+jegger06
+admin
+
+url http://inventory.system.com/
+
+add this to C:\xampp\apache\conf\extra\httpd-vhosts.conf
+
+<VirtualHost *:80>
+    ServerAdmin inventory.system.com
+    DocumentRoot "C:\xampp\htdocs\Practice\PHP\inventory_system"
+    ServerName inventory.system.com
+    ErrorLog "logs/dummy-host2.example.com-error.log"
+    CustomLog "logs/dummy-host2.example.com-access.log" common
+</VirtualHost>
+
+edit the file hosts in C:\Windows\System32\drivers\etc\. open it on notepad via administrator rights
+127.0.0.1       inventory.system.com
