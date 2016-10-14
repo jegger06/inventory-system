@@ -48,10 +48,10 @@
 					<div class="panel-heading">Demo Table #1</div>
 					<!-- START table-responsive-->
 					<div class="table-responsive">
-						<table id="table-ext-1" class="table table-bordered table-hover">
+						<table id="table-ext" class="table table-striped list_department">
 							<thead>
 								<tr>
-									<th></th>
+									<th>#</th>
 									<th>Department Name</th>
 									<th>Number of Users</th>
 									<th>Action</th>
@@ -63,9 +63,8 @@
 									<td>Web Integration</td>
 									<td>10</td>
 									<td>
-										<div class="checkbox c-checkbox">
-											<label><input type="checkbox"><span class="fa fa-check"></span></label>
-										</div>
+										<button type="button" class="btn btn-xs btn-info btn-outline">Update</button>
+										<button type="button" class="btn btn-xs btn-danger btn-outline">Delete</button>
 									</td>
 								</tr>
 							</tbody>
