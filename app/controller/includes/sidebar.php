@@ -147,13 +147,13 @@ require dirname(__DIR__).'/db/connect.php';
 					</a>
 				</li>
 				<li class=" ">
-					<a href="#" title="List Department">
+					<a href="list_department" title="List Department">
 						<em class="icon-organization"></em>
 						<span data-localize="sidebar.nav.pages.LOCK">List Department</span>
 					</a>
 				</li>
 				<li class=" ">
-					<a href="#" title="Add Department">
+					<a href="add_department" title="Add Department">
 						<em class="icon-graduation"></em>
 						<span data-localize="sidebar.nav.pages.LOCK">Add Department</span>
 					</a>

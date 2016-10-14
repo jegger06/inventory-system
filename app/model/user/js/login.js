@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
 	$('#login_form').submit(function(e){
 		// $.simplyToast('This is a danger message!', 'danger');
 		e.preventDefault();
@@ -28,4 +29,9 @@ $(document).ready(function(){
 			$.simplyToast('You have been successfully log out.', 'success');
 		}
 	},500);	
+	if ($('#username').val() == '') {
+		$('#username').focus();
+	} else {
+		$('#password').focus();
+	}
 });

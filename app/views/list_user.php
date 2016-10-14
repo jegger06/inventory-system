@@ -23,11 +23,13 @@
 	<link rel="stylesheet" href="/assets/css/animate.min.css">
 	<!-- WHIRL (spinners)-->
 	<link rel="stylesheet" href="/assets/css/whirl.css">
+	<!-- Loaders.css-->
+   <link rel="stylesheet" href="/assets/css/loaders.css">
 	<!-- =============== PAGE VENDOR STYLES ===============-->
 	<!-- =============== BOOTSTRAP STYLES ===============-->
 	<link rel="stylesheet" href="/assets/css/bootstrap.css" id="bscss">
 	<!-- =============== APP STYLES ===============-->
-	<link rel="stylesheet" href="/assets/css/app.css" id="maincss">
+	<link rel="stylesheet" href="/assets/css/app.css">
 </head>
 <body>
 	<div class="wrapper">
@@ -41,107 +43,111 @@
 		<section>
 			<!-- Page content-->
 			<div class="content-wrapper">
-				<h3>Tables
-					<small>A showcase of different components inside tables</small>
+				<h3>Users Record
+					<!-- <small>A showcase of different components inside tables</small> -->
 				</h3>
+				
 				<!-- START panel-->
 				<div class="panel panel-default">
-					<div class="panel-heading">Demo Table #1</div>
-					<!-- START table-responsive-->
-					<div class="table-responsive">
-						<table id="table-ext-1" class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th>First Name</th>
-									<th>Last Name</th>
-									<th>Email</th>
-									<th>Department</th>
-									<th>Position</th>
-									<th>Profile</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Larry</td>
-									<td>the Bird</td>
-									<td>jegger.saren@transcosmos.com.ph</td>
-									<td>Web Integration</td>
-									<td>Associate</td>
-									<td>1 week</td>
-									<td>
-										<label class="switch switch-sm">
-											<input type="checkbox" checked="checked">
-											<span></span>
-										</label>
-									</td>
-								</tr>
-								<tr>
-									<td>Mark</td>
-									<td>Otto</td>
-									<td>mail@example.com</td>
-									<td>Ecommerce</td>
-									<td>Senior Associate</td>
-									<td>25 minutes</td>
-									<td>
-										<label class="switch switch-sm">
-											<input type="checkbox" checked="checked">
-											<span></span>
-										</label>
-									</td>
-								</tr>
-								<tr>
-									<td>Jacob</td>
-									<td>Thornton</td>
-									<td>mail@example.com</td>
-									<td>Panasonic</td>
-									<td>Team Lead</td>
-									<td>10 hours</td>
-									<td>
-										<label class="switch switch-sm">
-											<input type="checkbox" checked="checked">
-											<span></span>
-										</label>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<!-- END table-responsive-->
-					<div class="panel-footer">
+					<div class="panel-heading">
 						<div class="row">
-							<div class="col-lg-2">
-								<div class="input-group">
-									<input type="text" placeholder="Search" class="input-sm form-control">
-									<span class="input-group-btn">
-										<button type="button" class="btn btn-sm btn-default">Search</button>
-									</span>
-								</div>
-							</div>
-							<div class="col-lg-8"></div>
-							<div class="col-lg-2">
-								<div class="input-group pull-right">
-									<select class="input-sm form-control">
-										<option value="0">Bulk action</option>
-										<option value="1">Delete</option>
-										<option value="2">Clone</option>
-										<option value="3">Export</option>
-									</select>
-									<span class="input-group-btn">
-										<button class="btn btn-sm btn-default">Apply</button>
-									</span>
+							<div class="col-sm-12">
+								<div class="row">
+									<div class="col-sm-4">
+										<form class="form-inline">
+											<div class="form-group">
+												<label class="">Records per page</label>
+												<select name="per_page" id="per_page" class="form-control input">
+													<option value="5">5</option>
+													<option value="10">10</option>
+													<option value="15">15</option>
+													<option value="20">20</option>
+													<option value="30">30</option>
+												</select>
+											</div>
+										</form>	
+									</div>
+									<div class="col-sm-8">
+										<form role="form" class="form-inline pull-right">
+
+											<div class="form-group">
+												<select name="department" id="department" class="form-control input" required>
+													<option value="">All Department</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<select name="position" id="position" class="form-control input" required>
+													<option value="">All Position</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<select name="status" id="status" class="form-control input" required>
+													<option value="">All Status</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<div class="input-group">
+													<input type="text" id="search" placeholder="Search name" class="input-sm form-control input">
+													<span class="input-group-btn">
+													<button type="button" class="btn btn-sm btn-default">Search</button>
+													</span>
+												</div>
+											</div>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					<!-- START table-responsive-->
+						
+					<div class="table-responsive">
+						<table id="table-ext-1" class="table table-striped list_user">
+							<thead>
+								<tr>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>User Name</th>
+									<th>Email</th>
+									<th>Department</th>
+									<th>Position</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+							<tfoot>
+								<tr class="tfoot">
+									<td colspan="3" class="num_result"></td>
+									<td colspan="4" align="right">
+										<nav>
+											<ul id="paginate" class="pagination pagination-sm m0">
+												<li class="previous" style="display: none;"">
+													<a href="#" aria-label="Previous">
+														<span aria-hidden="true">«</span>
+													</a>
+												</li>
+												<li class="next" style="display: none;"">
+													<a href="#" aria-label="Next">
+														<span aria-hidden="true">»</span>
+													</a>
+												</li>
+											</ul>
+										</nav>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					<!-- END table-responsive-->
+					
 				</div>
 				<!-- END panel-->
 			</div>
 		</section>
 		<!-- Page footer-->
-		<footer>
-			<span>&copy; 2016 - Angle</span>
-		</footer>
+		<?php include '../controller/includes/footer.php'; ?>
 	</div>
 	<!-- =============== VENDOR SCRIPTS ===============-->
 	<!-- MODERNIZR-->
@@ -163,7 +169,7 @@
 	<!-- SCREENFULL-->
 	<script src="/assets/js/screenfull.js"></script>
 	<!-- LOCALIZE-->
-	<script src="/assets/js/jquery.localize.js"></script>
+	<!-- <script src="/assets/js/jquery.localize.js"></script> -->
 	<!-- RTL demo-->
 	<script src="/assets/js/demo-rtl.js"></script>
 	<!-- =============== PAGE VENDOR SCRIPTS ===============-->
@@ -173,5 +179,6 @@
 	<script src="/assets/js/app.js"></script>
 	<script src="/assets/js/simply-toast.min.js"></script>
 	<script src="/app/model/user/js/logout.js"></script>
+	<script src="/app/model/user/js/view_user.js"></script>
 </body>
 </html>
