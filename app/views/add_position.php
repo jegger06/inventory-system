@@ -48,11 +48,11 @@
 				</h3>
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<form class="form-horizontal departmentForm">
+						<form class="form-horizontal positionForm">
 							<div class="form-group">
-								<label class="col-lg-2 control-label">Department</label>
+								<label class="col-lg-2 control-label">Position</label>
 								<div class="col-lg-10">
-									<input type="text" placeholder="Department Name" class="form-control department_name mb20" pattern=".{3,}" required title="3 characters minimum">
+									<input type="text" placeholder="Position Name" class="form-control position_name mb20" pattern=".{3,}" required title="3 characters minimum">
 								</div>
 							</div>
 							<div class="form-group">
@@ -96,6 +96,6 @@
 	<script src="/assets/js/app.js"></script>
 	<script src="/assets/js/simply-toast.min.js"></script>
 	<script src="/app/model/user/js/logout.js"></script>
-	<script src="/app/model/user/js/add_department.js"></script>
+	<script src="/app/model/user/js/add_position.js"></script>
 </body>
 </html>

@@ -1,9 +1,10 @@
-<?php
-	
+<?php 
+
 	session_start();
 	if (empty($_SESSION['user_id'])) {
 		header('Location: login');
 	}
+	require '../controller/helpers/generate_title.php';
 
 ?>
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="description" content="Bootstrap Admin App + jQuery">
 	<meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
-	<title>Angle - Bootstrap Admin Template</title>
+	<title>Angle - <?php echo title(); ?></title>
 	<!-- =============== VENDOR STYLES ===============-->
 	<!-- FONT AWESOME-->
 	<link rel="stylesheet" href="/assets/fontawesome/css/font-awesome.min.css">
@@ -23,13 +24,13 @@
 	<link rel="stylesheet" href="/assets/css/animate.min.css">
 	<!-- WHIRL (spinners)-->
 	<link rel="stylesheet" href="/assets/css/whirl.css">
-	<!-- Loaders.css-->
-	<link rel="stylesheet" href="/assets/css/loaders.css">
 	<!-- =============== PAGE VENDOR STYLES ===============-->
+	<!-- SWEET ALERT-->
+	<link rel="stylesheet" href="/assets/css/sweetalert.css">
 	<!-- =============== BOOTSTRAP STYLES ===============-->
 	<link rel="stylesheet" href="/assets/css/bootstrap.css" id="bscss">
 	<!-- =============== APP STYLES ===============-->
-	<link rel="stylesheet" href="/assets/css/app.css">
+	<link rel="stylesheet" href="/assets/css/app.css" id="maincss">
 </head>
 <body>
 	<div class="wrapper">
@@ -38,16 +39,13 @@
 		<!-- sidebar-->
 		<?php include '../controller/includes/sidebar.php'; ?>
 		<!-- offsidebar-->
-
 		<!-- Main section-->
 		<section>
 			<!-- Page content-->
 			<div class="content-wrapper">
-				<h3>Users Record
-					<!-- <small>A showcase of different components inside tables</small> -->
+				<h3><?php echo title('Waiting for approval'); ?>
+					<small></small>
 				</h3>
-				
-				<!-- START panel-->
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="row">
@@ -69,20 +67,14 @@
 									</div>
 									<div class="col-sm-8">
 										<form role="form" class="form-inline pull-right">
-
 											<div class="form-group">
-												<select name="department" id="department" class="form-control input" required>
+												<select name="department" id="department" class="form-control input" required="">
 													<option value="">All Department</option>
 												</select>
 											</div>
 											<div class="form-group">
-												<select name="position" id="position" class="form-control input" required>
+												<select name="position" id="position" class="form-control input" required="">
 													<option value="">All Position</option>
-												</select>
-											</div>
-											<div class="form-group">
-												<select name="status" id="status" class="form-control input" required>
-													<option value="">All Status</option>
 												</select>
 											</div>
 											<div class="form-group">
@@ -99,52 +91,47 @@
 							</div>
 						</div>
 					</div>
-				<!-- START table-responsive-->
-						
-					<div class="table-responsive">
-						<div class="loader_holder"><div class="triangle-skew-spin"><div></div></div></div>
-						<table id="table-ext-1" class="table table-striped list_user">
-							<thead>
-								<tr>
-									<th>First Name</th>
-									<th>Last Name</th>
-									<th>User Name</th>
-									<th>Email</th>
-									<th>Department</th>
-									<th>Position</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-							<tbody>
-
-							</tbody>
-							<tfoot>
-								<tr class="tfoot">
-									<td colspan="3" class="num_result"></td>
-									<td colspan="4" align="right">
-										<nav>
-											<ul id="paginate" class="pagination pagination-sm m0">
-												<li class="previous" style="display: none;">
-													<a href="#" aria-label="Previous">
-														<span aria-hidden="true">«</span>
-													</a>
-												</li>
-												<li class="next" style="display: none;">
-													<a href="#" aria-label="Next">
-														<span aria-hidden="true">»</span>
-													</a>
-												</li>
-											</ul>
-										</nav>
-									</td>
-								</tr>
-							</tfoot>
-						</table>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-striped list_waiting_user">
+								<thead>
+									<tr>
+										<th>First Name</th>
+										<th>Last Name</th>
+										<th>User Name</th>
+										<th>Email</th>
+										<th>Department</th>
+										<th>Position</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="4" class="total_result"></td>
+										<td colspan="4" align="right">
+											<nav>
+												<ul id="paginate" class="pagination pagination-sm m0">
+													<li class="previous" style="display: none;">
+														<a href="#" aria-label="Previous">
+															<span aria-hidden="true">«</span>
+														</a>
+													</li>
+													<li class="next" style="display: none;">
+														<a href="#" aria-label="Next">
+															<span aria-hidden="true">»</span>
+														</a>
+													</li>
+												</ul>
+											</nav>
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
 					</div>
-					<!-- END table-responsive-->
-					
 				</div>
-				<!-- END panel-->
 			</div>
 		</section>
 		<!-- Page footer-->
@@ -169,17 +156,15 @@
 	<script src="/assets/js/jquery.slimscroll.min.js"></script>
 	<!-- SCREENFULL-->
 	<script src="/assets/js/screenfull.js"></script>
-	<!-- LOCALIZE-->
-	<!-- <script src="/assets/js/jquery.localize.js"></script> -->
 	<!-- RTL demo-->
 	<script src="/assets/js/demo-rtl.js"></script>
 	<!-- =============== PAGE VENDOR SCRIPTS ===============-->
-	<!-- SPARKLINE-->
-	<script src="/assets/js/index.js"></script>
+	<!-- SWEET ALERT-->
+	<script src="/assets/js/sweetalert.min.js"></script>
 	<!-- =============== APP SCRIPTS ===============-->
 	<script src="/assets/js/app.js"></script>
 	<script src="/assets/js/simply-toast.min.js"></script>
 	<script src="/app/model/user/js/logout.js"></script>
-	<script src="/app/model/user/js/view_user.js"></script>
+	<script src="/app/model/user/js/view_waiting_user.js"></script>
 </body>
 </html>

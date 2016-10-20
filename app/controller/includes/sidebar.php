@@ -159,19 +159,19 @@ require dirname(__DIR__).'/db/connect.php';
 					</a>
 				</li>
 				<li class=" ">
-					<a href="#" title="List Position">
+					<a href="list_position" title="List Position">
 						<em class="icon-paper-plane"></em>
 						<span data-localize="sidebar.nav.pages.LOCK">List Position</span>
 					</a>
 				</li>
 				<li class=" ">
-					<a href="#" title="Add Position">
+					<a href="add_position" title="Add Position">
 						<em class="icon-paper-clip"></em>
 						<span data-localize="sidebar.nav.pages.LOCK">Add Position</span>
 					</a>
 				</li>
 				<li class=" ">
-					<a href="#" title="Waiting Approval Users">
+					<a href="waiting_approval" title="Waiting Approval Users">
 						<em class="icon-user-follow"></em>
 						<span data-localize="sidebar.nav.pages.LOCK">Waiting Approval Users</span>
 					</a>

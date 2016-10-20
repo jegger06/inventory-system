@@ -3,15 +3,29 @@
 require '../../../controller/db/connect.php';
 require '../../../controller/helpers/generate_json.php';
 
-$id = $_POST['userID'];
-$status = $_POST['status'];
+$id = trim(mysqli_real_escape_string($conn, $_POST['userID']));
+$status = trim(mysqli_real_escape_string($conn, $_POST['status']));
+$waiting = trim(mysqli_real_escape_string($conn, $_POST['waiting']));
+
 if ($status == 'true') {
 	$statusID = 1;
 } else {
 	$statusID = 2;
 }
 
-$query = mysqli_query($conn, "UPDATE `tbl_user_info` SET `status_id` = $statusID WHERE `user_id` = $id");
+$query = "UPDATE `tbl_user_info` SET `status_id` = $statusID";
+
+
+if ($waiting == true) {
+	$query .= ", `attempt` = 1 ";
+}
+
+$query .= " WHERE `user_id` = $id";
+
+$query_run = mysqli_query($conn, $query);
+
+
+
 $success = 1;
 
 $data = array('success' => $success, 'statusID' => $statusID);

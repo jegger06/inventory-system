@@ -8843,10 +8843,39 @@ fieldset[disabled] .flatdoc-wrapper .button:hover {
 }
 
 .list_department th,
-.list_department td {
+.list_position th,
+.list_department td,
+.list_position td {
 	text-align: center;
 }
 
+.list_position th:nth-child(3),
 .list_department th:nth-child(3) {
 	width: 22%;
+}
+
+.department_holder,
+.position_holder {
+	position: relative;
+	padding-bottom: 20px;
+}
+
+.sweet-overlay {
+	z-index: 10000;
+}
+
+.wrapper>section {
+	z-index: 1;
+}
+
+.showSweetAlert[data-animation=pop] {
+	z-index: 10000;
+}
+
+.loader_holder {
+	display: none;
+}
+
+.no_result {
+	display: none;
 }

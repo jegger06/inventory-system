@@ -124,7 +124,7 @@
 	<!-- SCREENFULL-->
 	<script src="/assets/js/screenfull.js"></script>
 	<!-- LOCALIZE-->
-	<script src="/assets/js/jquery.localize.js"></script>
+	<!-- <script src="/assets/js/jquery.localize.js"></script> -->
 	<!-- RTL demo-->
 	<script src="/assets/js/demo-rtl.js"></script>
 	<!-- =============== PAGE VENDOR SCRIPTS ===============-->

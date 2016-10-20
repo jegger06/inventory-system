@@ -78,11 +78,17 @@ if (!is_null($statusID) || !empty($statusID)) {
 }
 
 if ($search_key != '') {
-	$query_users .= "$query_condition i.first_name LIKE '%$search_key%' || i.last_name LIKE '%$search_key%' || i.email LIKE '%$search_key%' || i.user_name LIKE '%$search_key%'";
+	$query_users .= "$query_condition (i.first_name LIKE '%$search_key%' || i.last_name LIKE '%$search_key%' || i.email LIKE '%$search_key%' || i.user_name LIKE '%$search_key%')";
 	$query_condition = 'AND ';
 }
 
-$query_users .=  " ORDER BY i.first_name";
+if ((is_null($departmentID) || empty($departmentID)) && (is_null($positionID) || empty($positionID)) && (is_null($statusID) || empty($statusID)) && $search_key == '' ) {
+	$query_users .= "WHERE";
+} else {
+	$query_users .= "AND";
+}
+
+$query_users .=  " i.attempt IN (1,2,3,4,5) ORDER BY i.first_name";
 
 if (in_array($per_page, $perPage)) {
 	$query_users .= " LIMIT $page_num, $per_page";
@@ -137,9 +143,17 @@ if (!is_null($statusID) || !empty($statusID)) {
 }
 
 if ($search_key != '') {
-	$sql .= "$sql_condition `first_name` LIKE '%$search_key%' || `last_name` LIKE '%$search_key%' || `email` LIKE '%$search_key%' || `user_name` LIKE '%$search_key%'";
+	$sql .= "$sql_condition (`first_name` LIKE '%$search_key%' || `last_name` LIKE '%$search_key%' || `email` LIKE '%$search_key%' || `user_name` LIKE '%$search_key%')";
 	$sql_condition = 'AND ';
 }
+
+if ((is_null($departmentID) || empty($departmentID)) && (is_null($positionID) || empty($positionID)) && (is_null($statusID) || empty($statusID)) && $search_key == '' ) {
+	$sql .= "WHERE";
+} else {
+	$sql .= "AND";
+}
+
+$sql .=  " attempt IN (1,2,3,4,5)";
 
 $sql_query = mysqli_query($conn, $sql);
 
@@ -149,7 +163,7 @@ $total_users = $data['total_users'];
 if ($success == 0) {
 	$data = array('success' => $success, 'result' => $err_msg, 'depID' => $depID, 'departmentID' => $departmentID, 'total_users' => $total_users);
 } else{
-	$data = array('success' => $success, 'result' => $result, 'total_result' => $query_num_rows, 'depID' => $depID, 'departmentID' => $departmentID, 'total_users' => $total_users);
+	$data = array('success' => $success, 'result' => $result, 'total_result' => $query_num_rows, 'depID' => $depID, 'departmentID' => $departmentID, 'total_users' => $total_users, 'query' => $query_users);
 }
 
 generate_json($data);
