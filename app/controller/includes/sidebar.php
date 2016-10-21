@@ -132,56 +132,81 @@ require dirname(__DIR__).'/db/connect.php';
 				?>
 
 				<li class="nav-heading ">
-					<span data-localize="sidebar.heading.People">People</span>
+					<span data-localize="sidebar.heading.People">Manage Account</span>
 				</li>
-				<li class=" ">
-					<a href="list_user" title="List Users">
+				
+				<li class="">
+					<a href="#manage_account" title="Users" data-toggle="collapse">
 						<em class="icon-people"></em>
-						<span data-localize="sidebar.nav.pages.LOCK">List Users</span>
+						<span data-localize="sidebar.nav.element.ELEMENTS">Users</span>
 					</a>
+					<ul id="manage_account" class="nav sidebar-subnav collapse">
+						<li class="sidebar-subnav-header">Users</li>
+						<li class=" ">
+							<a href="list_user" title="List Users">
+								<span data-localize="sidebar.nav.pages.LOCK">List Users</span>
+							</a>
+						</li>
+						<li class=" ">
+							<a href="add_user" title="Add Users">
+								<span data-localize="sidebar.nav.pages.LOCK">Add Users</span>
+							</a>
+						</li>
+						<li class=" ">
+							<a href="waiting_approval" title="Waiting Approval Users">
+								<span data-localize="sidebar.nav.pages.LOCK">Waiting Approval Users</span>
+							</a>
+						</li>
+						<li class=" ">
+							<a href="locked_users" title="Locked Users">
+								<span data-localize="sidebar.nav.pages.LOCK">Locked Users</span>
+							</a>
+						</li>
+					</ul>
 				</li>
-				<li class=" ">
-					<a href="add_user" title="Add Users">
-						<em class="icon-user"></em>
-						<span data-localize="sidebar.nav.pages.LOCK">Add Users</span>
+				<li>
+					<a href="#department_nav" title="Department" data-toggle="collapse">
+						<!-- <em class="icon-organization"></em> -->
+						<i class="fa fa-building-o"></i>
+						<span data-localize="sidebar.nav.element.ELEMENTS">Department</span>
 					</a>
+					<ul id="department_nav" class="nav sidebar-subnav collapse">
+						<li class=" ">
+							<a href="list_department" title="List Department">
+								<span data-localize="sidebar.nav.pages.LOCK">List Department</span>
+							</a>
+						</li>
+						<li class=" ">
+							<a href="add_department" title="Add Department">
+								<span data-localize="sidebar.nav.pages.LOCK">Add Department</span>
+							</a>
+						</li>
+					</ul>
 				</li>
-				<li class=" ">
-					<a href="list_department" title="List Department">
+				<li>
+					<a href="#position_nav" title="Position" data-toggle="collapse">
 						<em class="icon-organization"></em>
-						<span data-localize="sidebar.nav.pages.LOCK">List Department</span>
+						<span data-localize="sidebar.nav.element.ELEMENTS">Position</span>
 					</a>
+					<ul id="position_nav" class="nav sidebar-subnav collapse">
+						<li class=" ">
+							<a href="list_position" title="List Position">
+								<span data-localize="sidebar.nav.pages.LOCK">List Position</span>
+							</a>
+						</li>
+						<li class=" ">
+							<a href="add_position" title="Add Position">
+								<span data-localize="sidebar.nav.pages.LOCK">Add Position</span>
+							</a>
+						</li>
+					</ul>
 				</li>
-				<li class=" ">
-					<a href="add_department" title="Add Department">
-						<em class="icon-graduation"></em>
-						<span data-localize="sidebar.nav.pages.LOCK">Add Department</span>
-					</a>
-				</li>
-				<li class=" ">
-					<a href="list_position" title="List Position">
-						<em class="icon-paper-plane"></em>
-						<span data-localize="sidebar.nav.pages.LOCK">List Position</span>
-					</a>
-				</li>
-				<li class=" ">
-					<a href="add_position" title="Add Position">
-						<em class="icon-paper-clip"></em>
-						<span data-localize="sidebar.nav.pages.LOCK">Add Position</span>
-					</a>
-				</li>
-				<li class=" ">
-					<a href="waiting_approval" title="Waiting Approval Users">
-						<em class="icon-user-follow"></em>
-						<span data-localize="sidebar.nav.pages.LOCK">Waiting Approval Users</span>
-					</a>
-				</li>
-				<li class=" ">
-					<a href="#" title="Locked Users">
-						<em class="icon-user-unfollow"></em>
-						<span data-localize="sidebar.nav.pages.LOCK">Locked Users</span>
-					</a>
-				</li>
+				
+					
+
+
+
+				
 
 				<?php
 				}
@@ -202,7 +227,7 @@ require dirname(__DIR__).'/db/connect.php';
 						<span data-localize="sidebar.nav.DOCUMENTATION">Edit Profile</span>
 					</a>
 				</li>
-				<!-- <li class="nav-heading ">
+				<li class="nav-heading ">
 					<span data-localize="sidebar.heading.MORE">Reports</span>
 				</li>
 				<li class=" ">
@@ -211,7 +236,7 @@ require dirname(__DIR__).'/db/connect.php';
 						<span>Overview Chart</span>
 					</a>
 				</li>
-				<li class=" ">
+				<li class="">
 					<a href="#it_reports" title="IT Equipments Reports" data-toggle="collapse">
 						<em class="icon-chemistry"></em>
 						<span data-localize="sidebar.nav.element.ELEMENTS">IT Equipment Reports</span>
@@ -248,7 +273,7 @@ require dirname(__DIR__).'/db/connect.php';
 							</a>
 						</li>
 					</ul>
-				</li> -->
+				</li>
 			</ul>
 			<!-- END sidebar nav-->
 		</nav>

@@ -24,26 +24,22 @@
 	<link rel="stylesheet" href="/assets/css/animate.min.css">
 	<!-- WHIRL (spinners)-->
 	<link rel="stylesheet" href="/assets/css/whirl.css">
-	<!-- Loaders.css-->
-	<link rel="stylesheet" href="/assets/css/loaders.css">
 	<!-- =============== PAGE VENDOR STYLES ===============-->
 	<!-- SWEET ALERT-->
 	<link rel="stylesheet" href="/assets/css/sweetalert.css">
 	<!-- =============== BOOTSTRAP STYLES ===============-->
 	<link rel="stylesheet" href="/assets/css/bootstrap.css" id="bscss">
 	<!-- =============== APP STYLES ===============-->
-	<link rel="stylesheet" href="/assets/css/app.css" id="maincss"
-></head>
+	<link rel="stylesheet" href="/assets/css/app.css" id="maincss">
+</head>
 <body>
 	<div class="wrapper">
-
 		<!-- top navbar-->
 		<?php include '../controller/includes/header.php'; ?>
 		<!-- sidebar-->
 		<?php include '../controller/includes/sidebar.php'; ?>
 		<!-- offsidebar-->
 		<!-- Main section-->
-
 		<section>
 			<!-- Page content-->
 			<div class="content-wrapper">
@@ -64,12 +60,23 @@
 													<option value="10">10</option>
 													<option value="15">15</option>
 													<option value="20">20</option>
+													<option value="30">30</option>
 												</select>
 											</div>
 										</form>	
 									</div>
 									<div class="col-sm-8">
 										<form role="form" class="form-inline pull-right">
+											<div class="form-group">
+												<select name="department" id="department" class="form-control input" required="">
+													<option value="">All Department</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<select name="position" id="position" class="form-control input" required="">
+													<option value="">All Position</option>
+												</select>
+											</div>
 											<div class="form-group">
 												<div class="input-group">
 													<input type="text" id="search" placeholder="Search name" class="input-sm form-control input">
@@ -84,96 +91,51 @@
 							</div>
 						</div>
 					</div>
-					<!-- START table-responsive-->
-					<div class="table-responsive">
-						<div class="loader_holder"><div class="triangle-skew-spin"><div></div></div></div>
-						<table id="table-ext" class="table table-striped list_department">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>Department Name</th>
-									<th>Number of Users</th>
-									<th>Action</th>
-								</tr>
-							</thead>
-							<tbody>
-								<!-- <tr>
-									<td>2</td>
-									<td>Web Integration</td>
-									<td>10</td>
-									<td>
-										<button type="button" class="btn btn-xs btn-info btn-outline">Update</button>
-									</td>
-								</tr> -->
-							</tbody>
-							<tfoot>
-								<tr class="tfoot">
-									<td colspan="2" class="num_result"></td>
-									<td colspan="2" style="text-align:right">
-										<nav>
-											<ul id="paginate" class="pagination pagination-sm m0">
-												<li class="previous" style="display: none;"">
-													<a href="#" aria-label="Previous">
-														<span aria-hidden="true">«</span>
-													</a>
-												</li>
-												<li class="next" style="display: none;"">
-													<a href="#" aria-label="Next">
-														<span aria-hidden="true">»</span>
-													</a>
-												</li>
-											</ul>
-										</nav>
-									</td>
-								</tr>
-							</tfoot>
-						</table>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-striped locked_users">
+								<thead>
+									<tr>
+										<th>First Name</th>
+										<th>Last Name</th>
+										<th>User Name</th>
+										<th>Email</th>
+										<th>Department</th>
+										<th>Position</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="4" class="total_result"></td>
+										<td colspan="4" align="right">
+											<nav>
+												<ul id="paginate" class="pagination pagination-sm m0">
+													<li class="previous" style="display: none;">
+														<a href="#" aria-label="Previous">
+															<span aria-hidden="true">«</span>
+														</a>
+													</li>
+													<li class="next" style="display: none;">
+														<a href="#" aria-label="Next">
+															<span aria-hidden="true">»</span>
+														</a>
+													</li>
+												</ul>
+											</nav>
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
 					</div>
-					<!-- END table-responsive-->
 				</div>
-				
 			</div>
 		</section>
-
 		<!-- Page footer-->
 		<?php include '../controller/includes/footer.php'; ?>
-
-	</div>
-	<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Update Department</h4>
-				</div>
-				<div class="modal-body">
-					<form class="update_department" autocomplete="off">
-					<input type="hidden" value="" id="dep_id" name="dep_id">
-						<div class="form-group department_holder">
-							<label for="dep_name">Department Name</label>
-							<input type="text" name="dep_name" id="dep_name" class="form-control" value="">
-						</div>
-						<div class="form-group">
-							<button class="btn btn-sm btn-info">Update</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-content">
-				<div class="sa-icon sa-success animate" style="display: block;">
-					<span class="sa-line sa-tip animateSuccessTip"></span>
-					<span class="sa-line sa-long animateSuccessLong"></span>
-					<div class="sa-placeholder"></div>
-					<div class="sa-fix"></div>
-				</div>
-			</div>
-			</div>
-		</div>
 	</div>
 	<!-- =============== VENDOR SCRIPTS ===============-->
 	<!-- MODERNIZR-->
@@ -202,8 +164,7 @@
 	<!-- =============== APP SCRIPTS ===============-->
 	<script src="/assets/js/app.js"></script>
 	<script src="/assets/js/nav_active.js"></script>
-	<script src="/assets/js/simply-toast.min.js"></script>
 	<script src="/app/model/user/js/logout.js"></script>
-	<script src="/app/model/user/js/view_department.js"></script>
+	<script src="/app/model/user/js/locked_users.js"></script>
 </body>
 </html>

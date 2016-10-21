@@ -43,7 +43,8 @@ if ($posID != null) {
 	}
 }
 
-$sql = "SELECT i.user_id, i.first_name, i.last_name, i.user_name, i.email, d.dep_name, p.pos_name FROM tbl_user_info i LEFT JOIN tbl_user_department d ON i.dep_id = d.dep_id LEFT JOIN tbl_user_position p ON i.pos_id = p.pos_id ";
+// Query locked users
+$sql = "SELECT i.user_id, i.first_name, i.last_name, i.email, i.user_name, d.dep_name, p.pos_name FROM tbl_user_info i LEFT JOIN tbl_user_department d ON i.dep_id = d.dep_id LEFT JOIN tbl_user_position p ON i.pos_id = p.pos_id ";
 
 $sql_condition = "WHERE";
 
@@ -68,9 +69,7 @@ if ($search_key == '' && (is_null($departmentID) || empty($departmentID)) && (is
 	$sql .= " AND";
 }
 
-
-$sql .=  " i.status_id = 2 AND i.attempt = 0 ORDER BY i.first_name";
-
+$sql .= " i.status_id = 2 AND i.attempt = 6 ORDER BY i.first_name";
 
 if (in_array($per_page, $perPage)) {
 	$sql .= " LIMIT $page_num, $per_page";
@@ -98,11 +97,12 @@ if ($sql_query) {
 	}
 } else {
 	$success = 0;
-	$err_message = 'Nothing to display.';
+	$err_message = 'Something is wrong with the query';
 }
 
 
 
+// Query total locked users
 $sql_total = "SELECT COUNT(`user_id`) AS `total_users` FROM `tbl_user_info` ";
 
 $sql_total_condition = "WHERE";
@@ -128,12 +128,15 @@ if ($search_key == '' && (is_null($departmentID) || empty($departmentID)) && (is
 	$sql_total .= " AND";
 }
 
-$sql_total .= " status_id = 2 AND attempt = 0";
+$sql_total .= " status_id = 2 AND attempt = 6";
 
 $sql_total_query = mysqli_query($conn, $sql_total);
 
 $data = mysqli_fetch_assoc($sql_total_query);
 $total_users = $data['total_users'];
+
+
+
 
 if ($success == 0) {
 	$data = array('success' => $success, 'result' => $err_message, 'total_users' => $total_users);
@@ -141,5 +144,5 @@ if ($success == 0) {
 	$data = array('success' => $success, 'result' => $result, 'total_users' => $total_users);
 }
 
-generate_json($data);
 
+generate_json($data);

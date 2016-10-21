@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	var total_data = 0;
-	// var user;
 	var page_num = 1;
 	var pagination_num = 5;
 	loadDepartment();
@@ -48,6 +47,7 @@ $(document).ready(function() {
 		var status = true;
 		var name = $(this).parents('tr').find('td:first-child').text() + ' ' + $(this).parents('tr').find('td:nth-child(2)').text();
 		var userID = $(this).parents('tr').attr('data-id');
+		var unlocked = 0;
 		var waiting = true;
 		swal({
 			title: 'Activate?',
@@ -62,7 +62,7 @@ $(document).ready(function() {
 				$.ajax({
 					type: 'POST',
 					url: '/app/model/user/php/update_status.php',
-					data: {'userID' : userID, 'status' : status, 'waiting' : waiting},
+					data: {'userID' : userID, 'status' : status, 'waiting' : waiting, 'unlocked' : unlocked},
 					success: function(data) {
 						if (data.success == 1) {
 							swal("Success!", "The account has been updated!", "success");
@@ -144,7 +144,7 @@ $(document).ready(function() {
 			success: function(data) {
 				if (data.success == 1) {
 					var result = data.result;
-					var show_result = per_page * page_num - per_page + result.length;					
+					var show_result = per_page * page_num - per_page + result.length;
 					var tbl_row = '';
 					$.each(result, function(key, val) {
 						user = val.split('#');

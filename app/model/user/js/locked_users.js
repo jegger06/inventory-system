@@ -1,23 +1,19 @@
 $(document).ready(function() {
-	$('.list_user').hide();
-	$('.loader_holder').show();
-	setTimeout(function() {
-		$('.loader_holder').hide();
-		$('.list_user').show();
-		loadPagination(page = 1, total_data);
-	}, 500);
 	var total_data = 0;
-	var paginate_container = $('.pagination');
 	var page_num = 1;
 	var pagination_num = 5;
 	loadDepartment();
 	loadPosition();
-	loadStatus();
-	loadUser(total_data, page_num);
+	loadLockedUsers();
+	setTimeout(function() {
+		$('.loader_holder').hide();
+		$('.list_user').show();
+		loadPagination(page = 1, total_data);
+	}, 200);
 
 	$('#per_page').on('change', function() {
 		page_num = 1;
-		loadUser(total_data, page_num);
+		loadLockedUsers(total_data, page_num);
 		setTimeout(function(){
 			loadPagination(page = 1, total_data);
 		}, 300);
@@ -25,7 +21,7 @@ $(document).ready(function() {
 
 	$('#department').on('change', function() {
 		page_num = 1;
-		loadUser(total_data, page_num);
+		loadLockedUsers(total_data, page_num);
 		setTimeout(function(){
 			loadPagination(page = 1, total_data);
 		}, 300);
@@ -33,15 +29,7 @@ $(document).ready(function() {
 
 	$('#position').on('change', function() {
 		page_num = 1;
-		loadUser(total_data, page_num);
-		setTimeout(function(){
-			loadPagination(page = 1, total_data);
-		}, 300);
-	});
-
-	$('#status').on('change', function() {
-		page_num = 1;
-		loadUser(total_data, page_num);
+		loadLockedUsers(total_data, page_num);
 		setTimeout(function(){
 			loadPagination(page = 1, total_data);
 		}, 300);
@@ -49,34 +37,42 @@ $(document).ready(function() {
 
 	$('#search').keyup(function() {
 		page_num = 1;
-		loadUser(total_data, page_num);
+		loadLockedUsers(total_data, page_num);
 		setTimeout(function(){
 			loadPagination(page = 1, total_data);
 		}, 300);
 	});
 
-	$('body').delegate('.status', 'click', function() {
-		var element = this;
-		var status = $(this).prop('checked');
+	$('body').delegate('.status', 'click', function(e) {
+		e.preventDefault();
+		var status = true;
+		var name = $(this).parents('tr').find('td:first-child').text() + ' ' + $(this).parents('tr').find('td:nth-child(2)').text();
 		var userID = $(this).parents('tr').attr('data-id');
-		var firstname = $(this).parents('tr').find('td:first-child').text();
-		var lastname = $(this).parents('tr').find('td:nth-child(2)').text();
-		var name = firstname + ' ' + lastname;
 		var waiting = 0;
-		var unlocked = 0;
-		$.ajax({
-			type: 'POST',
-			url: '/app/model/user/php/update_status.php',
-			data: {'userID' : userID, 'status' : status, 'waiting' : waiting, 'unlocked' : unlocked},
-			success: function(data) {
-				if (data.statusID == 1) {
-					$(element).parent('label').attr('title', 'Active');
-					swal("Success!", "The account of " + "<strong>" + name + "</strong>" + " has been activated!", "success");
-				} else {
-					$(element).parent('label').attr('title', 'Inactive');
-					swal("Deactivated!", "You have deactivated the account of " + name + ".", "info");					
-				}
-			}
+		var unlocked = true;
+		swal({
+			title: 'Unlocked?',
+			text: 'The account of ' + name + ' will be unlocked.',
+			type: 'info',
+			showCancelButton: true,
+			closeOnConfirm: false,
+			showLoaderOnConfirm: true,
+		},
+		function() {
+			setTimeout(function() {
+				$.ajax({
+					type: 'POST',
+					url: '/app/model/user/php/update_status.php',
+					data: {'userID' : userID, 'status' : status, 'waiting' : waiting, 'unlocked' : unlocked},
+					success: function(data) {
+						if (data.success == 1) {
+							swal("Success!", "The account has been unlocked!", "success");
+							loadLockedUsers(total_data, page_num = 1);
+							loadPagination(page = 1, total_data);
+						}
+					}
+				});
+			}, 1000);
 		});
 	});
 
@@ -84,19 +80,19 @@ $(document).ready(function() {
 		e.preventDefault();
 		if (!$(this).parent('li').hasClass('next') && !$(this).parent('li').hasClass('previous') && !$(this).parent('li').hasClass('active')) {
 			// $(this).parent().parent().children('li.num').remove();
-			var page_num = $(this).text()
-			loadUser(total_data, page_num);
+			page_num = $(this).text()
+			loadLockedUsers(total_data, page_num);
 			loadPagination(page_num, total_data);
 			// alert(page_num);
 		} else if ($(this).parent('li').hasClass('next')) {
 			page_num = parseInt($('.pagination li.active').text()) + 1;
 			// $(this).parent().parent().children('li.num').remove();
-			loadUser(total_data, page_num);
+			loadLockedUsers(total_data, page_num);
 			loadPagination(page_num, total_data);
 		} else if ($(this).parent('li').hasClass('previous')) {
 			page_num = parseInt($('.pagination li.active').text()) - 1;
 			// $(this).parent().parent().children('li.num').remove();
-			loadUser(total_data, page_num);
+			loadLockedUsers(total_data, page_num);
 			loadPagination(page_num, total_data);
 			// alert(page_num);
 		}
@@ -135,78 +131,44 @@ $(document).ready(function() {
 		});
 	}
 
-	function loadStatus() {
-		$.ajax({
-			type: 'POST',
-			url: '/app/model/user/php/status.php',
-			success: function(data) {
-				var result = data.result;
-				if (data.success == 1) {
-					$.each(result, function(key, val) {
-						var status = val.split('#');
-						$('#status').append($('<option></option>').attr('value', status[0]).text(status[1]));
-					});
-				}
-			}
-		});
-	}
-
-	function loadUser(total_data, page_num) {
+	function loadLockedUsers() {
 		var depID = $('#department').val();
 		var posID = $('#position').val();
-		var statID = $('#status').val();
 		var search = $('#search').val();
 		var per_page = $('#per_page').val();
-
 		$.ajax({
 			type: 'POST',
-			url: '/app/model/user/php/load_user.php',
-			data: { 'depID': depID, 'posID': posID, 'statID': statID, 'search': search, 'per_page': per_page, 'page_num' : page_num},
-			beforeSend: function () {
-				// $('.input').attr('disabled', true);
-			},
-			complete: function() {
-				// $('.input').attr('disabled', false);
-			},
+			url: '/app/model/user/php/load_locked_users.php',
+			data: {'depID': depID, 'posID': posID, 'search': search, 'per_page': per_page, 'page_num' : page_num},
 			success: function(data) {
-				var result = data.result;
-				var show_result = per_page * page_num - per_page + result.length;
 				if (data.success == 1) {
-					$('#paginate').show();
 					var tbl_row;
+					var result = data.result;
+					var show_result = per_page * page_num - per_page + result.length;	
 					$.each(result, function(key, val) {
-						var user = val.split('#');
-						tbl_row += '<tr data-id=' + user[0] + '><td>' + user[1] + '</td><td>' + user[2] + '</td><td>' + user[4] + '</td><td>' + user[3] + '</td><td>' + user[5] + '</td><td>' + user[6] + '</td>';
-						if (user[7] == 'active') {
-							tbl_row += '<td><label class="switch switch-sm" title="Active"><input type="checkbox" class="status" checked><span></span></label></td>';
-						} else {
-							tbl_row += '<td><label class="switch switch-sm" title="Inactive"><input type="checkbox" class="status"><span></span></label></td>';
-						}
+						user = val.split('#');
+						tbl_row += '<tr data-id="' + user[0] + '"><td>' + user[1] + '</td><td>' + user[2] + '</td><td>' + user[3] + '</td><td>' + user[4] + '</td><td>' + user[5] + '</td><td>' + user[6] + '</td><td><label class="switch switch-sm" title="Inactive"><input type="checkbox" class="status"><span></span></label></td></tr>'
 					});
-					$('.list_user tbody').html(tbl_row);
-					$('.num_result').attr('colspan', 4).removeClass('text-center').html('Showing <strong>' + show_result + ' of <strong>' + data.total_users + '</strong>');
+					$('.locked_users tbody').html(tbl_row);
+					$('.total_result').attr('colspan', 4).removeClass('text-center').html('Showing: <strong>' + show_result + '</strong> of <strong>' + data.total_users +'</strong>');
 					$('#paginate').show();
 				} else {
-					var num_row = '<strong>' + data.result + '</strong>';
-					$('.list_user tbody').html('');
-					$('.num_result').attr('colspan', 7).addClass('text-center').html(num_row);
+					$('.locked_users tbody').html('');
+					$('.total_result').attr('colspan', 7).addClass('text-center').html('<strong>' + data.result + '</strong>');
 					$('#paginate').hide();
 				}
 				total_data = parseInt(data.total_users);
 				totalData(total_data);
-				// alert(total_data);
 			}
-		});
+		})
 	}
 
 	function totalData(total) {
 		total_data = total;
 	}
-	
-	
-
 
 	function loadPagination(page = 1, total_data) {
+		// alert(total_data)
 		$('.pagination li.num').remove();
 		if (total_data != 0) {
 			var insertPagination = '';
@@ -273,5 +235,9 @@ $(document).ready(function() {
 			$('#paginate li:first-child').after(insertPagination);
 		}
 	}
+
+
+
+
 
 });

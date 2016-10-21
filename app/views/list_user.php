@@ -26,6 +26,8 @@
 	<!-- Loaders.css-->
 	<link rel="stylesheet" href="/assets/css/loaders.css">
 	<!-- =============== PAGE VENDOR STYLES ===============-->
+	<!-- SWEET ALERT-->
+	<link rel="stylesheet" href="/assets/css/sweetalert.css">
 	<!-- =============== BOOTSTRAP STYLES ===============-->
 	<link rel="stylesheet" href="/assets/css/bootstrap.css" id="bscss">
 	<!-- =============== APP STYLES ===============-->
@@ -174,11 +176,13 @@
 	<!-- RTL demo-->
 	<script src="/assets/js/demo-rtl.js"></script>
 	<!-- =============== PAGE VENDOR SCRIPTS ===============-->
+	<!-- SWEET ALERT-->
+	<script src="/assets/js/sweetalert.min.js"></script>
 	<!-- SPARKLINE-->
 	<script src="/assets/js/index.js"></script>
 	<!-- =============== APP SCRIPTS ===============-->
 	<script src="/assets/js/app.js"></script>
-	<script src="/assets/js/simply-toast.min.js"></script>
+	<script src="/assets/js/nav_active.js"></script>
 	<script src="/app/model/user/js/logout.js"></script>
 	<script src="/app/model/user/js/view_user.js"></script>
 </body>
