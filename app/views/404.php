@@ -37,7 +37,7 @@
 				<li><a href="/app/views/admin" class="text-muted">Go to App</a>
 				</li>
 				<li class="text-muted">|</li>
-				<li><a href="login.html" class="text-muted">Login</a>
+				<li><a href="login" class="text-muted">Login</a>
 				</li>
 				<li class="text-muted">|</li>
 				<li><a href="register.html" class="text-muted">Register</a>

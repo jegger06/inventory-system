@@ -56,7 +56,7 @@ if (isset($_SESSION['user_id'])) {
 							<span class="fa fa-user form-control-feedback text-muted"></span>
 						</div>
 						<div class="form-group has-feedback">
-							<input id="password" type="password" placeholder="Password" required class="form-control" pattern=".{4,}" title="4 characters minimum">
+							<input id="password" type="password" placeholder="Password" required class="form-control" pattern=".{5,}" title="5 characters minimum">
 							<span class="fa fa-lock form-control-feedback text-muted"></span>
 						</div>
 						<div class="clearfix">

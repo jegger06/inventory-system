@@ -8879,3 +8879,27 @@ fieldset[disabled] .flatdoc-wrapper .button:hover {
 .no_result {
 	display: none;
 }
+
+.tabs {
+	margin: 0;
+}
+
+.tabs li a {
+	display: block;
+	color: #555;
+}
+
+.tabs a:hover, .tabs a.act {
+	background-color: #f5f5f5;	
+	text-decoration: none;
+	border-color: transparent;
+}
+
+.tabs a.act {
+	font-weight: bold;
+}
+
+.edit_profile .form-group {
+	position: relative;
+	padding-bottom: 20px;
+}

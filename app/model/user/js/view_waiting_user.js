@@ -126,7 +126,6 @@ $(document).ready(function() {
 						var pos = val.split('#');
 						$('#position').append($('<option></option>').attr('value', pos[0]).text(pos[1]));
 					});
-
 				}
 			}
 		});

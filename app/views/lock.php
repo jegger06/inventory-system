@@ -33,11 +33,11 @@
 						</div>
 						<div class="clearfix">
 							<div class="pull-left mt-sm">
-								<a href="recover.html" class="text-muted">
+								<a href="recover" class="text-muted">
 									<small>Forgot your password?</small>
 								</a>
 							</div>
-							<div class="pull-right"><a href="dashboard.html" class="btn btn-sm btn-primary">Unlock</a>
+							<div class="pull-right"><a href="admin" class="btn btn-sm btn-primary">Unlock</a>
 							</div>
 						</div>
 					</form>

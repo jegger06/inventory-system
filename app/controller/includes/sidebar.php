@@ -1,7 +1,7 @@
 <?php 
 
 require dirname(__DIR__).'/db/connect.php';
-
+$posID = $_SESSION['pos_id'];
 ?>
 <aside class="aside">
 	<!-- START Sidebar (left)-->
@@ -23,13 +23,7 @@ require dirname(__DIR__).'/db/connect.php';
 							<!-- Name and Job-->
 							<div class="user-block-info">
 								<span class="user-block-name">Hello, <?php echo $_SESSION['firstname'].' '.$_SESSION['lastname']; ?></span>
-								<?php 
-									$posID = $_SESSION['pos_id'];
-									$query = mysqli_query($conn, "SELECT `pos_name` FROM `tbl_user_position` WHERE `pos_id` = $posID LIMIT 1");
-									$row = mysqli_fetch_assoc($query);
-									$position = $row['pos_name'];
-								?>
-								<span class="user-block-role"><?php echo ucfirst($position); ?></span>
+								<span class="user-block-role"></span>
 							</div>
 						</div>
 					</div>
@@ -222,7 +216,7 @@ require dirname(__DIR__).'/db/connect.php';
 					</a>
 				</li>
 				<li class=" ">
-					<a href="#" title="Edit Profile">
+					<a href="edit_profile" title="Edit Profile">
 						<em class="icon-options"></em>
 						<span data-localize="sidebar.nav.DOCUMENTATION">Edit Profile</span>
 					</a>

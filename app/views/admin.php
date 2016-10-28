@@ -897,7 +897,7 @@
 	<!-- SCREENFULL-->
 	<script src="/assets/js/screenfull.js"></script>
 	<!-- LOCALIZE-->
-	<script src="/assets/js/jquery.localize.js"></script>
+	<!-- <script src="/assets/js/jquery.localize.js"></script> -->
 	<!-- RTL demo-->
 	<script src="/assets/js/demo-rtl.js"></script>
 	<!-- =============== PAGE VENDOR SCRIPTS ===============-->
@@ -919,8 +919,8 @@
 	<script src="/assets/js/demo-flot.js"></script>
 	<!-- =============== APP SCRIPTS ===============-->
 	<script src="/assets/js/app.js"></script>
-	<script src="/assets/js/simply-toast.min.js"></script>
-	<script src="/app/model/user/js/logout.js"></script>
+	<script src="/app/model/user/js/user_details.js"></script>
 	<script src="/assets/js/nav_active.js"></script>
+	<script src="/app/model/user/js/logout.js"></script>
 </body>
 </html>

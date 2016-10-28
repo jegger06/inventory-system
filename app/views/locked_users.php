@@ -163,6 +163,7 @@
 	<script src="/assets/js/sweetalert.min.js"></script>
 	<!-- =============== APP SCRIPTS ===============-->
 	<script src="/assets/js/app.js"></script>
+	<script src="/app/model/user/js/user_details.js"></script>
 	<script src="/assets/js/nav_active.js"></script>
 	<script src="/app/model/user/js/logout.js"></script>
 	<script src="/app/model/user/js/locked_users.js"></script>
