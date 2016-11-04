@@ -8903,3 +8903,13 @@ fieldset[disabled] .flatdoc-wrapper .button:hover {
 	position: relative;
 	padding-bottom: 20px;
 }
+
+.add_contact {
+	color: #656565;
+}
+
+.add_contact:hover,
+.add_contact:focus {
+	color: #515253;
+	text-decoration: none;
+}

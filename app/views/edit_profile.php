@@ -104,7 +104,7 @@
 										Account
 									</div>
 									<div class="panel-body">
-										<form class="accountForm">
+										<form class="accountForm" id="accountForm">
 											<div class="form-group">
 												<label for="current_password">Current Password</label>
 												<input type="password" id="current_password" name="current_password" class="form-control" placeholder="Your current password" pattern=".{5,}" title="5 characters minimum" required>
@@ -130,8 +130,41 @@
 										Contact Details
 									</div>
 									<div class="panel-body">
-										<form>
-
+										<form id="contactForm">
+											<div class="row">
+												<!-- <div class="contact">
+													<div class="col-sm-3">
+														<div class="form-group">
+															<label for="contact_type">Contact Type</label>
+															<select class="form-control contact_type" id="contact_type">
+																<option value="">Select One</option>
+															</select>
+														</div>		
+													</div>
+													<div class="col-sm-3">
+														<div class="form-group">
+															<label for="contact_prefix">Contact Number</label>
+															<select class="form-control contact_prefix" id="contact_prefix">
+																<option value="">Select One</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-sm-5 text-right">
+														<label></label>
+														<input type="text" name="number" class="form-control">
+													</div>
+													<div class="col-sm-1 text-right">
+														<label>&nbsp;</label>
+														<p><a href="#" class="btn btn-danger btn-xs" title="Delete Contact"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></p>
+													</div>
+												</div> -->
+												<div class="col-sm-12">
+													<div class="form-group">
+														<button type="submit" class="btn btn-info">Update Phone Number</button>
+													</div>
+												</div>
+											</div>
+											
 										</form>
 									</div>
 								</div>
