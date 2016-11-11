@@ -5,7 +5,7 @@ require '../../../controller/helpers/generate_json.php';
 
 $contactID = trim(mysqli_real_escape_string($conn, $_POST['type_id']));
 
-$sql = mysqli_query($conn, "SELECT `prefix_id`, `prefix` FROM `tbl_contact_prefix` WHERE `contact_id` = $contactID");
+$sql = mysqli_query($conn, "SELECT `contact_id`, `prefix` FROM `tbl_contact_prefix` WHERE `contact_id` = $contactID");
 if ($sql) {
 	$sql_rows = mysqli_num_rows($sql);
 	if ($sql_rows == 0) {
@@ -16,7 +16,7 @@ if ($sql) {
 
 		while ($row = mysqli_fetch_assoc($sql)) {
 
-			$result[] = $row['prefix_id'].'#'.
+			$result[] = $row['contact_id'].'#'.
 						$row['prefix'];
 
 		}

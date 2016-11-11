@@ -126,38 +126,41 @@
 							</div>
 							<div role="tabpanel" class="tab-pane" id="contact">
 								<div class="panel b">
-									<div class="panel-heading bg-gray-lighter text-bold">
-										Contact Details
+									<div class="panel-heading bg-gray-lighter text-bold clearfix">
+										<span class="pull-left">Contact Details</span>
+										<span class="pull-right"><a href="#" class="add_contact"><i class="fa fa-phone-square"></i> Add Contact Details</a></span>
 									</div>
 									<div class="panel-body">
 										<form id="contactForm">
 											<div class="row">
-												<!-- <div class="contact">
-													<div class="col-sm-3">
-														<div class="form-group">
-															<label for="contact_type">Contact Type</label>
-															<select class="form-control contact_type" id="contact_type">
-																<option value="">Select One</option>
-															</select>
-														</div>		
-													</div>
-													<div class="col-sm-3">
-														<div class="form-group">
-															<label for="contact_prefix">Contact Number</label>
-															<select class="form-control contact_prefix" id="contact_prefix">
-																<option value="">Select One</option>
-															</select>
+												<div class="contact_holder">
+													<!-- <div class="contact">
+														<div class="col-sm-3">
+															<div class="form-group">
+																<label for="contact_type">Contact Type</label>
+																<select class="form-control contact_type" id="contact_type">
+																	<option value="">Select One</option>
+																</select>
+															</div>		
 														</div>
-													</div>
-													<div class="col-sm-5 text-right">
-														<label></label>
-														<input type="text" name="number" class="form-control">
-													</div>
-													<div class="col-sm-1 text-right">
-														<label>&nbsp;</label>
-														<p><a href="#" class="btn btn-danger btn-xs" title="Delete Contact"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></p>
-													</div>
-												</div> -->
+														<div class="col-sm-3">
+															<div class="form-group">
+																<label for="contact_prefix">Contact Number</label>
+																<select class="form-control contact_prefix" id="contact_prefix">
+																	<option value="">Select One</option>
+																</select>
+															</div>
+														</div>
+														<div class="col-sm-5 text-right">
+															<label></label>
+															<input type="text" name="number" class="form-control">
+														</div>
+														<div class="col-sm-1 text-right">
+															<label>&nbsp;</label>
+															<p><a href="#" class="btn btn-danger btn-xs" title="Delete Contact"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></p>
+														</div>
+													</div> -->
+												</div>
 												<div class="col-sm-12">
 													<div class="form-group">
 														<button type="submit" class="btn btn-info">Update Phone Number</button>

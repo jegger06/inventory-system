@@ -135,7 +135,7 @@ $(document).ready(function() {
 
 	// Contact Details tab
 
-	$('body').delegate('.contact_type', 'change', function() {
+	$('body').delegate('.contact', 'change', function() {
 		if ($(this).val() == '') {
 			$(this).parent().parent().next('div').find('.contact_prefix').html('<option value="">Select One</option>')
 		} else {
@@ -143,12 +143,55 @@ $(document).ready(function() {
 		}
 	});
 
-	$('body').delegate('.contact_type', 'click', function() {
-		var selected_type = $(this).val() + '#' + $(this).text();
-
-		
-		loadContactType($(this), selected_type);
+	$('.add_contact').click(function(e) {
+		e.preventDefault();
+		var add_new_contact = '';
+		add_new_contact += '<div class="contact clearfix" data-id="">';
+			add_new_contact += '<div class="col-sm-3">';
+				add_new_contact += '<div class="form-group">';
+					add_new_contact += '<label for="contact_type">Contact Type</label>';
+					add_new_contact += '<select class="form-control contact contact_type" id="contact_type">';
+					add_new_contact += '</select>';
+				add_new_contact += '</div>';
+			add_new_contact += '</div>';
+			add_new_contact += '<div class="col-sm-3">';
+				add_new_contact += '<div class="form-group">';
+					add_new_contact += '<label for="contact_prefix">Contact Number</label>';
+					add_new_contact += '<select class="form-control prefix contact_prefix" id="contact_prefix">';
+					add_new_contact += '</select>';
+				add_new_contact += '</div>';
+			add_new_contact += '</div>';
+			add_new_contact += '<div class="col-sm-5 text-right">';
+			add_new_contact +=		'<label></label>';
+			add_new_contact +=		'<input type="text" name="number" class="form-control">';
+			add_new_contact +=	'</div>';
+			add_new_contact += '<div class="col-sm-1 text-right">';
+				add_new_contact += '<label>&nbsp;</label>';
+				add_new_contact += '<p>';
+					add_new_contact += '<a href="#" class="btn btn-danger btn-xs delete_contact" title="Delete Contact">';
+						add_new_contact += '<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>';
+					add_new_contact += '</a>';
+				add_new_contact += '</p>';
+			add_new_contact += '</div>';
+		add_new_contact += '</div>';
+		$('.contact_holder').append(add_new_contact);
+		loadContactType();
 	});
+
+	$('body').delegate('.delete_contact', 'click', function(e) {
+		e.preventDefault();
+		if ($(this).parents('.contact').attr('data-id') != '') {
+			alert(true);
+		} else {
+			if ($(this).parents('.contact').find('input[name="number"]').val() == '') {
+				$(this).parents('.contact').fadeOut();				
+			} else {
+				alert('The input has a value');
+			}
+		}
+	});
+
+
 
 	function validate(typed) {
 		var input = typed.val();
@@ -205,44 +248,85 @@ $(document).ready(function() {
 			url: '/app/model/user/php/show_contact_details.php',
 			data: { 'userID' : user_id },
 			success: function(data) {
+				var contact_form = '';
 				if (data.success == 1) {
 					var result = data.result;
 					var contact;
 					var user_contact_id;
 					var contact_id;
 					var contact_type;
-					var contact_form = '';
-					var contact_id_arr = [];
+					// var contact_id_arr = [];
 					$.each(result, function(key, val) {
 						contact = val.split('#');
-						user_contact_id = contact[0];
-						contact_id = contact[1];
-						contact_type = contact[2];
-						contact_prefix = contact[3];
-						contact_number = contact[4];
-						contact_id_arr.push(contact_id + '#' + contact_type);
-						contact_form += '<div class="contact clearfix"><div class="col-sm-3"><div class="form-group"><label for="contact_type">Contact Type</label>';
-						contact_form += '<select class="form-control contact_type" id="contact_type"><option value="' + contact_id + '">' + contact_type + '</option></select></div></div>';
-						contact_form += '<div class="col-sm-3"><div class="form-group"><label for="contact_prefix">Contact Number</label>';
-						contact_form += '<select class="form-control contact_prefix" id="contact_prefix"><option value="">Select One</option></select></div></div>';
-						contact_form += '<div class="col-sm-5 text-right"><label></label><input type="text" name="number" class="form-control"></div>';
-						contact_form += '<div class="col-sm-1 text-right"><label>&nbsp;</label><p>';
-						contact_form += '<a href="#" class="btn btn-danger btn-xs" title="Delete Contact"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>';
-						contact_form += '</p></div></div>';
-
+						contact_form += '<div class="contact clearfix" data-id="' + contact[0] + '">';
+							contact_form += '<div class="col-sm-3">';
+								contact_form += '<div class="form-group">';
+									contact_form += '<label for="contact_type">Contact Type</label>';
+									contact_form += '<select class="form-control contact contact_type'+ key +'" id="contact_type">';
+									contact_form += '</select>';
+								contact_form += '</div>';
+							contact_form += '</div>';
+							contact_form += '<div class="col-sm-3">';
+								contact_form += '<div class="form-group">';
+									contact_form += '<label for="contact_prefix">Contact Number</label>';
+									contact_form += '<select class="form-control prefix contact_prefix' + key + '" id="contact_prefix">';
+									contact_form += '</select>';
+								contact_form += '</div>';
+							contact_form += '</div>';
+							contact_form += '<div class="col-sm-5 text-right">';
+								contact_form += '<label></label>';
+								contact_form += '<input type="text" name="number" class="form-control" value="' + contact[4] + '">';
+							contact_form += '</div>';
+							contact_form += '<div class="col-sm-1 text-right">';
+								contact_form += '<label>&nbsp;</label>';
+								contact_form += '<p>';
+									contact_form += '<a href="#" class="btn btn-danger btn-xs delete_contact" title="Delete Contact">';
+										contact_form += '<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>';
+									contact_form += '</a>';
+								contact_form += '</p>';
+							contact_form += '</div>';
+						contact_form += '</div>';
+						loadContactType(contact, key);
+						loadContactPrefix(contact, key);
 					});
-					$('#contactForm .row').html(contact_form);
+				} else {
+					contact_form += '<div class="contact clearfix" data-id="">';
+						contact_form += '<div class="col-sm-3">';
+							contact_form += '<div class="form-group">';
+								contact_form += '<label for="contact_type">Contact Type</label>';
+								contact_form += '<select class="form-control contact contact_type" id="contact_type">';
+								contact_form += '</select>';
+							contact_form += '</div>';
+						contact_form += '</div>';
+						contact_form += '<div class="col-sm-3">';
+							contact_form += '<div class="form-group">';
+								contact_form += '<label for="contact_prefix">Contact Number</label>';
+								contact_form += '<select class="form-control prefix contact_prefix" id="contact_prefix">';
+								contact_form += '</select>';
+							contact_form += '</div>';
+						contact_form += '</div>';
+						contact_form += '<div class="col-sm-5 text-right">';
+						contact_form +=		'<label></label>';
+						contact_form +=		'<input type="text" name="number" class="form-control">';
+						contact_form +=	'</div>';
+						contact_form += '<div class="col-sm-1 text-right">';
+							contact_form += '<label>&nbsp;</label>';
+							contact_form += '<p>';
+								contact_form += '<a href="#" class="btn btn-danger btn-xs delete_contact" title="Delete Contact">';
+									contact_form += '<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>';
+								contact_form += '</a>';
+							contact_form += '</p>';
+						contact_form += '</div>';
+					contact_form += '</div>';
+					loadContactType();
 				}
+				$('#contactForm .contact_holder').html(contact_form);
 			}
 		})
 	}
-	/*
-	Still buggy.. Kailangan ko ilagay nalang ang function ng loadContactType sa contactDetails 
-	para sabay sila sa pag generate ng contactDetails at may selected option na kaya lang 
-	hindi yun maganda kasi dalawang beses tatawagin ang function
-	*/
 
-	function loadContactType(element, val) {
+	function loadContactType(contactArray = 0, index = 0) {
+		console.log(index)
 		$.ajax({
 			type: 'POST',
 			url: '/app/model/user/php/load_contact_type.php',
@@ -250,47 +334,51 @@ $(document).ready(function() {
 			success: function(data) {
 				if (data.success == 1) {
 					var result = data.result;
-					var selected = val.split('#');
-					var type_list = '';
-					type_list += '<option value="">Select One</option>';
+					var type_list = '<option value="">Select One</option>';
+					type_list += ''
 					$.each(result, function(key, val) {
 						var c_type = val.split('#');
-						if (c_type[0] == selected[0] && c_type[1] == selected[1]) {
-							type_list += '<option value=" ' + c_type[0] + ' " selected> ' + c_type[1] + ' </option>';
-						} else {
-							type_list += '<option value=" ' + c_type[0] + ' "> ' + c_type[1] + ' </option>';							
-						}
-						
+						var isSelected = c_type[0] == contactArray[1] && c_type[1] == contactArray[2] ? 'selected' : '';
+						type_list += '<option value="' + c_type[0] + '" '+ isSelected +'>' + c_type[1] + '</option>';							
 					});
-					element.html(type_list);
-					
+					if(contactArray != 0) {
+						$('.contact_type'+ index).html(type_list);
+					} else {
+						$('.contact_type').html(type_list);
+					}
 				}
 			}
 		})
 	}
 
 	function loadContactPrefix(c_type_id, parent) {
-		// console.log(parent.parent().parent().next('div').find('.contact_prefix').html());
-		if (c_type_id != '') {
-			$.ajax({
-				type: 'POST',
-				url: '/app/model/user/php/load_contact_prefix.php',
-				data: { 'type_id' : c_type_id },
-				success: function(data) {
-					if (data.success == 1) {
-						var result = data.result;
-						var c_prefix;
-						var option_prefix;
-						option_prefix += '<option value="">Select One</option>';
-						$.each(result, function(key, val) {
-							c_prefix = val.split('#');
-							option_prefix += '<option value="' + c_prefix[0] + '">' + c_prefix[1] + '</option>';
-						});
-						parent.parent().parent().next('div').find('.contact_prefix').html(option_prefix)
+		var newId = c_type_id;
+		if ($.isArray(c_type_id)) {
+			newId = c_type_id[1];
+		}
+		$.ajax({
+			type: 'POST',
+			url: '/app/model/user/php/load_contact_prefix.php',
+			data: { 'type_id' : newId },
+			success: function(data) {
+				if (data.success == 1) {
+					var result = data.result;
+					var c_prefix;
+					var option_prefix;
+					option_prefix += '<option value="">Select One</option>';
+					$.each(result, function(key, val) {
+						c_prefix = val.split('#');
+						var isSelected = c_prefix[1] == c_type_id[3] && c_prefix[0] == c_type_id[1] ? 'selected' : '';
+						option_prefix += '<option value="' + c_prefix[0] + '" '+ isSelected +'>' + c_prefix[1] + '</option>';
+					});
+					if(!$.isArray(c_type_id)) {
+						parent.parent().parent().next('div').find('.prefix').html(option_prefix);
+					} else {
+						$('.contact_prefix'+ parent).html(option_prefix);
 					}
 				}
-			});
-		}
+			}
+		});
 	}
 
 });
